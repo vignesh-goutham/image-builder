@@ -1,4 +1,10 @@
 file:
+  /var/cache/etcdadm/etcd/{{ .Vars.etcd_version }}/etcd-{{ .Vars.etcd_version }}-linux-amd64.tar.gz:
+    exists: true
+    sha256: {{ .Vars.etcd_sha256 }}
+  /opt/cni/bin/host-device:
+    exists: true
+    sha256: {{ .Vars.kubernetes_cni_host_device_sha256 }}
 {{range $name, $vers := index .Vars .Vars.OS "common-files"}}
   {{ $name }}:
     exists: {{ $vers.exists }}

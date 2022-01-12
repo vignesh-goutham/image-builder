@@ -20,6 +20,7 @@
   "etcd_version":"",
   "etcdadm_http_source":"",
   "kubernetes_semver": "v1.25.10",
+  "kubernetes_full_version": "v1.25.10",
   "kubernetes_series": "v1.25",
   "kubernetes_source_type": "pkg",
   "systemd_prefix": "/usr/lib/systemd",
