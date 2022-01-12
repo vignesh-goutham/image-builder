@@ -32,6 +32,11 @@ command:
     stderr: [ ]
     timeout: 0
 {{end}}
+  cat /etc/containerd/config.toml | grep sandbox_image | tr -d '"' | awk -F ' = ' '{print $2}':
+    exit-status: 0
+    stderr: []
+    timeout: 0
+    stdout: [{{ .Vars.pause_image }}]
 {{if eq .Vars.kubernetes_source_type "pkg"}}
 {{if eq .Vars.kubernetes_cni_source_type "pkg"}}
   crictl images | grep -v 'IMAGE ID' | awk -F'[ /]' '{print $2}' | sed 's/-{{ .Vars.arch }}//g' | sort:
@@ -48,6 +53,12 @@ command:
     stderr: []
     timeout: 0
     stdout: ["kube-apiserver", "kube-controller-manager", "kube-proxy", "kube-scheduler"]
+# Make sure at least one of the embedded images is tagged with eks-d tag
+  crictl images | grep -v 'IMAGE ID' | awk -F'[ ]+' '{print $2}':
+    exit-status: 0
+    stderr: []
+    timeout: 0
+    stdout: [{{ .Vars.kubernetes_version }}]
 {{end}}
 {{if and (eq .Vars.kubernetes_source_type "http") (eq .Vars.kubernetes_cni_source_type "http") (.Vars.kubernetes_load_additional_imgs)}}
 # The second last pipe of awk is to take out arch from kube-apiserver-amd64 (i.e. amd64 or any other arch)
@@ -88,6 +99,11 @@ command:
     stderr: []
     timeout: 0
 {{end}}
+  etcdadm version --short:
+    exit-status: 0
+    stdout: [{{ .Vars.etcdadm_version }}]
+    stderr: []
+    timeout: 0
 {{range $name, $vers := index .Vars .Vars.OS .Vars.PROVIDER "command"}}
   {{ $name }}:
   {{range $key, $val := $vers}}

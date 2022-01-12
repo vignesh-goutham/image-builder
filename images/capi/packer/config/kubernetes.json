@@ -21,6 +21,7 @@
   "kubernetes_rpm_repo": "https://pkgs.k8s.io/core:/stable:/{{ user `kubernetes_series` }}/rpm/",
   "kubernetes_rpm_repo_arch": "x86_64",
   "kubernetes_rpm_version": "1.26.7",
+  "kubernetes_full_version": "v1.26.7",
   "kubernetes_semver": "v1.26.7",
   "kubernetes_series": "v1.26",
   "kubernetes_source_type": "pkg",

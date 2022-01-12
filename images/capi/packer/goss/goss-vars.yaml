@@ -105,6 +105,12 @@ kubernetes_cni_rpm_version: ""
 # When k8s and k8s cni source is http
 kubernetes_load_additional_imgs: false
 
+etcd_version: ""
+etcdadm_version: ""
+etcd_sha256: ""
+kubernetes_cni_host_device_sha256: ""
+pause_image: ""
+
 #windows variables
 kubernetes_install_path: ""
 windows_service_manager: ""
