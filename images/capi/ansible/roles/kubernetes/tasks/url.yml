@@ -12,6 +12,41 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ---
+- name: Download etcdadm binary
+  get_url:
+    url: "{{ etcdadm_http_source }}"
+    dest: "/tmp/etcdadm.tar.gz"
+    mode: 0755
+    owner: root
+    group: root
+
+- name: Install etcdadm
+  unarchive:
+    remote_src: yes
+    dest: "{{ sysusr_prefix }}/bin"
+    src: /tmp/etcdadm.tar.gz
+
+- name: Remove etcdadm tarball
+  file:
+    state: absent
+    path: /tmp/etcdadm.tar.gz
+
+- name: Create etcdadm cache directory
+  file:
+    state: directory
+    path: /var/cache/etcdadm/etcd/{{ etcd_version }}/
+    mode: 0755
+    owner: root
+    group: root
+
+- name: Download etcd tarball
+  get_url:
+    url: "{{ etcd_http_source }}"
+    dest: "/var/cache/etcdadm/etcd/{{ etcd_version }}/etcd-{{ etcd_version }}-linux-amd64.tar.gz"
+    mode: 0755
+    owner: root
+    group: root
+
 - name: Create CNI directory
   file:
     state: directory
@@ -22,7 +57,7 @@
 
 - name: Download CNI tarball
   get_url:
-    url: "{{ kubernetes_cni_http_source }}/{{ kubernetes_cni_semver }}/cni-plugins-linux-{{ kubernetes_goarch }}-{{ kubernetes_cni_semver }}.tgz"
+    url: "{{ kubernetes_cni_http_source }}/{{ kubernetes_cni_semver }}/cni-plugins-linux-{{ kubernetes_goarch }}-{{ kubernetes_cni_semver }}.tar.gz"
     checksum: "{{ kubernetes_cni_http_checksum }}"
     dest: /tmp/cni.tar.gz
     mode: "0755"
