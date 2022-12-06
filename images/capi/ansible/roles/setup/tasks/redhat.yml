@@ -42,6 +42,7 @@
   yum:
     name: '*'
     state: latest
+    exclude: kernel*,cloud-init*
     lock_timeout: 60
 
 - name: install baseline dependencies
