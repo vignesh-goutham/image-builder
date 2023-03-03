@@ -123,7 +123,12 @@
         "kubernetes_deb_version": "{{ user `kubernetes_deb_version` }}",
         "kubernetes_rpm_version": "{{ split (user `kubernetes_rpm_version`) \"-\" 0  }}",
         "kubernetes_source_type": "{{user `kubernetes_source_type`}}",
-        "kubernetes_version": "{{user `kubernetes_semver` | replace \"v\" \"\" 1}}"
+        "kubernetes_version": "{{user `kubernetes_semver` | replace \"v\" \"\" 1}}",
+        "etcdadm_version": "{{ user `etcdadm_version` }}",
+        "etcd_version": "{{ user `etcd_version` }}",
+        "etcd_sha256": "{{ user `etcd_sha256` }}",
+        "pause_image": "{{ user `pause_image` }}",
+        "kubernetes_cni_host_device_sha256": "{{ user `kubernetes_cni_host_device_sha256` }}"
       },
       "version": "{{user `goss_version`}}"
     }
