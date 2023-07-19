@@ -1,0 +1,15 @@
+[Unit]
+Description=Disables UDP offload for Ubuntu
+After=systemd-networkd-wait-online.service
+# Block manual interactions with this service
+RefuseManualStart=true
+RefuseManualStop=true
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/ethtool -K eth0 tx-udp_tnl-segmentation off
+ExecStart=/usr/sbin/ethtool -K eth0 tx-udp_tnl-csum-segmentation off
+RemainAfterExit=true
+
+[Install]
+WantedBy=network-online.target
