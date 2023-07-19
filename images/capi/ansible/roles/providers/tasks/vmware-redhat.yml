@@ -49,3 +49,21 @@
   file:
     path:  /tmp/cloud-init-vmware.sh
     state: absent
+
+- name: Create service disable udp offload
+  copy:
+    src: files/etc/systemd/system/disable-udp-offload-redhat.service
+    dest: /etc/systemd/system/disable-udp-offload-redhat.service
+    owner: root
+    group: root
+    mode: 0644
+  when: ansible_os_family != "Flatcar"
+
+- name: Enable disable-udp-offload-redhat.service
+  systemd:
+    name: disable-udp-offload-redhat.service
+    daemon_reload: yes
+    enabled: True
+    state: stopped
+  when: ansible_os_family != "Flatcar"
+  
