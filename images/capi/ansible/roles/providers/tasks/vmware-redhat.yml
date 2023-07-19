@@ -49,3 +49,20 @@
   file:
     path: /tmp/cloud-init-vmware.sh
     state: absent
+
+- name: Create service disable udp segmentation offload and tcp checksum offload
+  copy:
+    src: files/etc/systemd/system/disable-nic-offload-redhat.service
+    dest: /etc/systemd/system/disable-nic-offload-redhat.service
+    owner: root
+    group: root
+    mode: 0644
+  when: ansible_os_family != "Flatcar"
+
+- name: Enable disable-nic-offload-redhat.service
+  systemd:
+    name: disable-nic-offload-redhat.service
+    daemon_reload: yes
+    enabled: True
+    state: stopped
+  when: ansible_os_family != "Flatcar"

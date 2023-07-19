@@ -51,3 +51,20 @@
     content: |
       datasource: VMware
   when: ansible_distribution_version is version('22.04', '>=')
+
+- name: Create service disable udp offload
+  copy:
+    src: files/etc/systemd/system/disable-udp-offload-ubuntu.service
+    dest: /etc/systemd/system/disable-udp-offload-ubuntu.service
+    owner: root
+    group: root
+    mode: 0644
+  when: ansible_distribution_version is version('22.04', '>=')
+
+- name: Enable disable-udp-offload-ubuntu.service
+  systemd:
+    name: disable-udp-offload-ubuntu.service
+    daemon_reload: yes
+    enabled: True
+    state: stopped
+  when: ansible_distribution_version is version('22.04', '>=')

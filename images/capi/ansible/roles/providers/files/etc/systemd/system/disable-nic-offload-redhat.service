@@ -1,0 +1,16 @@
+[Unit]
+Description=Disables UDP segmentation and TCP checksum offload
+After=NetworkManager-wait-online.service
+# Block manual interactions with this service
+RefuseManualStart=true
+RefuseManualStop=true
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/ethtool -K eth0 tx-udp_tnl-segmentation off
+ExecStart=/usr/sbin/ethtool -K eth0 tx-udp_tnl-csum-segmentation off
+ExecStart=/usr/sbin/ethtool -K eth0 rx off tx off
+RemainAfterExit=true
+
+[Install]
+WantedBy=multi-user.target
