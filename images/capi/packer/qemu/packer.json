@@ -25,8 +25,9 @@
       "output_directory": "{{user `output_directory`}}",
       "qemu_binary": "{{user `qemu_binary`}}",
       "shutdown_command": "echo '{{user `ssh_password`}}' | sudo -S -E sh -c 'usermod -L {{user `ssh_username`}} && {{user `shutdown_command`}}'",
+      "ssh_handshake_attempts": "100",
       "ssh_password": "{{user `ssh_password`}}",
-      "ssh_timeout": "2h",
+      "ssh_timeout": "40m",
       "ssh_username": "{{user `ssh_username`}}",
       "type": "qemu",
       "vm_name": "{{user `vm_name`}}"
@@ -85,7 +86,9 @@
         "--scp-extra-args",
         "{{user `ansible_scp_extra_args`}}"
       ],
+      "max_retries": 5,
       "playbook_file": "./ansible/firstboot.yml",
+      "timeout": "30m",
       "type": "ansible",
       "user": "builder"
     },
@@ -112,7 +115,9 @@
         "--scp-extra-args",
         "{{user `ansible_scp_extra_args`}}"
       ],
+      "max_retries": 5,
       "playbook_file": "./ansible/node.yml",
+      "timeout": "30m",
       "type": "ansible",
       "user": "builder"
     },
