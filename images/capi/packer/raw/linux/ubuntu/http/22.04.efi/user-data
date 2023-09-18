@@ -79,6 +79,8 @@ autoinstall:
       device: format-0
       type: mount
       id: mount-0
+  apt:
+    fallback: offline-install
   updates: "all"
   ssh:
     install-server: true

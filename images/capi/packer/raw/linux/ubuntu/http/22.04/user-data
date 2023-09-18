@@ -58,6 +58,8 @@ autoinstall:
         id: mount-0
         device: format-0
         path: /
+  apt:
+    fallback: offline-install
   updates: 'all'
   ssh:
     install-server: true
