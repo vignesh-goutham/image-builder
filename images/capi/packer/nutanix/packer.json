@@ -132,6 +132,7 @@
     "image_delete": "false",
     "image_export": "false",
     "image_name": "{{user `build_name`}}-kube-{{user `kubernetes_semver`}}",
+    "image_url": "{{env `RHEL_IMAGE_URL`}}",
     "kubernetes_cni_deb_version": null,
     "kubernetes_cni_http_source": null,
     "kubernetes_cni_semver": null,
