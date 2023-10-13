@@ -124,3 +124,17 @@
     name: "{{ extra_rpms.split() }}"
     state: present
     lock_timeout: 60
+
+- name: ensure iptables present for redhat 8
+  yum:
+    name: "iptables"
+    state: present
+    lock_timeout: 60
+  when: ansible_os_family == "RedHat" and ansible_distribution == "RedHat" and ansible_distribution_major_version == "8"
+
+- name: ensure iptables present for redhat 9
+  yum:
+    name: "iptables-nft"
+    state: present
+    lock_timeout: 60
+  when: ansible_os_family == "RedHat" and ansible_distribution == "RedHat" and ansible_distribution_major_version == "9"
