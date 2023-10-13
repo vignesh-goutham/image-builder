@@ -45,7 +45,12 @@ EOF
   fi
 }
 
-echo "Checking if python is available"
-verify_python_version
-
+# Temporary eks-a change until our CI images are updated to include python 3.9
+# if ansible is already installed, which it will be in our CI, the python check is skipped
+# for users installing ansible for the first time via the ensure_ansible script
+# this check will still apply requiring python 3.9
+if ! command -v ansible >/dev/null 2>&1; then
+  echo "Checking if python is available"
+  verify_python_version
+fi
 python3 --version
