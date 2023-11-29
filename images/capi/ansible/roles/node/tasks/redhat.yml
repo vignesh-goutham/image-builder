@@ -1,0 +1,36 @@
+# Copyright 2020 The Kubernetes Authors.
+
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+
+# http://www.apache.org/licenses/LICENSE-2.0
+
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+---
+- name: Get the list of installed kernels
+  ansible.builtin.shell: "rpm -q kernel --qf '%{version}-%{release}\n' | sort -V"
+  register: installed_kernels
+
+- name: Get the current running kernel
+  ansible.builtin.command: "uname -r"
+  register: current_kernel
+
+- name: Set the number of kernels to keep
+  set_fact:
+    kernels_to_keep: 1
+
+- name: Filter out the current kernels
+  set_fact:
+    old_kernels: "{{ installed_kernels.stdout_lines | difference([current_kernel.stdout]) | reverse | slice(kernels_to_keep)|list }}"
+
+- name: Remove old kernels
+  ansible.builtin.yum:
+    name: "kernel-{{ item }}"
+    state: absent
+  loop: "{{ old_kernels }}"

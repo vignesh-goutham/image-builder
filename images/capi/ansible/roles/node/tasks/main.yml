@@ -18,6 +18,9 @@
 - import_tasks: amazonLinux2.yml
   when: ansible_distribution == "Amazon"
 
+- import_tasks: redhat.yml
+  when: ansible_distribution == "RedHat"
+
 # This is required until https://github.com/ansible/ansible/issues/77537 is fixed and used.
 - name: Override Flatcar's OS family
   set_fact:
