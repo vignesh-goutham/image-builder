@@ -318,7 +318,7 @@ PACKER_POWERVS_NODE_FLAGS := $(foreach f,$(abspath $(COMMON_POWERVS_VAR_FILES)),
 CENTOS_VERSIONS			:=	centos-7
 FLATCAR_VERSIONS		:=	flatcar
 PHOTON_VERSIONS			:=	photon-3 photon-4 photon-5
-RHEL_VERSIONS			:=	rhel-7 rhel-8
+RHEL_VERSIONS			:=	rhel-7 rhel-8 rhel-9
 ROCKYLINUX_VERSIONS     :=  rockylinux-8
 UBUNTU_VERSIONS			:=	ubuntu-2004 ubuntu-2004-efi ubuntu-2204 ubuntu-2204-efi
 WINDOWS_VERSIONS		:=	windows-2019 windows-2022
@@ -368,7 +368,7 @@ OPENSTACK_BUILD_NAMES	?=	openstack-ubuntu-2004 openstack-ubuntu-2204 openstack-f
 
 OSC_BUILD_NAMES 			?=	osc-ubuntu-2004 osc-ubuntu-2204
 
-QEMU_BUILD_NAMES			?=	qemu-ubuntu-2004 qemu-ubuntu-2204 qemu-ubuntu-2304 qemu-ubuntu-2204-efi qemu-centos-7 qemu-centos-9 qemu-ubuntu-2004-efi qemu-rhel-8 qemu-rockylinux-8 qemu-rockylinux-9 qemu-flatcar
+QEMU_BUILD_NAMES			?=	qemu-ubuntu-2004 qemu-ubuntu-2204 qemu-ubuntu-2304 qemu-ubuntu-2204-efi qemu-centos-7 qemu-centos-9 qemu-ubuntu-2004-efi qemu-rhel-8 qemu-rhel-9 qemu-rockylinux-8 qemu-rockylinux-9 qemu-flatcar
 
 QEMU_KUBEVIRT_BUILD_NAMES	:= $(addprefix kubevirt-,$(QEMU_BUILD_NAMES))
 
@@ -768,6 +768,7 @@ build-qemu-ubuntu-2304: ## Builds Ubuntu 23.04 QEMU image
 build-qemu-centos-7: ## Builds CentOS 7 QEMU image
 build-qemu-centos-9: ## Builds CentOS 9 Stream QEMU image
 build-qemu-rhel-8: ## Builds RHEL 8 QEMU image
++build-qemu-rhel-9: ## Builds RHEL 9 QEMU image
 build-qemu-rockylinux-8: ## Builds Rocky 8 QEMU image
 build-qemu-rockylinux-9: ## Builds Rocky 9 QEMU image
 build-qemu-all: $(QEMU_BUILD_TARGETS) ## Builds all Qemu images
@@ -908,6 +909,7 @@ validate-qemu-ubuntu-2204-efi: ## Validates Ubuntu 22.04 QEMU EFI image packer c
 validate-qemu-ubuntu-2304: ## Validates Ubuntu 23.04 QEMU image packer config
 validate-qemu-centos-7: ## Validates CentOS 7 QEMU image packer config
 validate-qemu-rhel-8: ## Validates RHEL 8 QEMU image
++validate-qemu-rhel-9: ## Validates RHEL 9 QEMU image
 validate-qemu-rockylinux-8: ## Validates Rocky Linux 8 QEMU image packer config
 validate-qemu-rockylinux-9: ## Validates Rocky Linux 9 QEMU image packer config
 validate-qemu-all: $(QEMU_VALIDATE_TARGETS) ## Validates all Qemu Packer config
