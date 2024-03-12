@@ -372,7 +372,7 @@ QEMU_BUILD_NAMES			?=	qemu-ubuntu-2004 qemu-ubuntu-2204 qemu-ubuntu-2304 qemu-ub
 
 QEMU_KUBEVIRT_BUILD_NAMES	:= $(addprefix kubevirt-,$(QEMU_BUILD_NAMES))
 
-RAW_BUILD_NAMES				?=      raw-ubuntu-2004 raw-ubuntu-2004-efi raw-ubuntu-2204 raw-ubuntu-2204-efi raw-flatcar raw-rhel-8
+RAW_BUILD_NAMES				?=      raw-ubuntu-2004 raw-ubuntu-2004-efi raw-ubuntu-2204 raw-ubuntu-2204-efi raw-flatcar raw-rhel-8 raw-rhel-9 raw-rhel-9-efi
 VBOX_BUILD_NAMES			?=      vbox-windows-2019
 
 POWERVS_BUILD_NAMES         ?= powervs-centos-8
